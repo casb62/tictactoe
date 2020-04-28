@@ -24,3 +24,21 @@ public class TictactoeController implements Initializable {
     }    
     
 }
+
+public class Controller {
+   private boolean isFirstPlayer = true;
+
+   public void buttonClickHandler(ActionEvent evt){
+
+        Button clickedButton = (Button) evt.getTarget();
+        String buttonLabel = clickedButton.getText();
+
+        if ("".equals(buttonLabel) && isFirstPlayer){
+            clickedButton.setText("X");
+            isFirstPlayer = false;
+        } else if("".equals(buttonLabel) && !isFirstPlayer){
+            clickedButton.setText("O");
+            isFirstPlayer = true;
+        }
+   }
+}
