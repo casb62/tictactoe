@@ -3,10 +3,13 @@ package mygame;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
@@ -25,6 +28,9 @@ public class TictactoeController implements Initializable {
     @FXML Button b9;
     
     @FXML GridPane gameBoard;
+    
+    @FXML
+    private MenuItem menuItem;
 
     @FXML
     private Button clickedButton;
@@ -43,6 +49,7 @@ public class TictactoeController implements Initializable {
         find3InARow();
     }
     
+    @FXML
     private boolean find3InARow(){
         //Row 1
         if(""!=b1.getText() && b1.getText() == b2.getText() && b2.getText() == b3.getText()){
@@ -87,6 +94,7 @@ public class TictactoeController implements Initializable {
         return false;
     }
     
+    @FXML
     private void highlightWinningCombo(Button first, Button second, Button third){
         first.getStyleClass().add("winning-square");
         second.getStyleClass().add("winning-square");
@@ -96,6 +104,7 @@ public class TictactoeController implements Initializable {
         applyFadeTransition(third);
     }
     
+    @FXML
     private void applyFadeTransition(Button winningButton){
         FadeTransition ft = new FadeTransition(Duration.millis(1000), winningButton);
         ft.setFromValue(1.0);
@@ -103,6 +112,28 @@ public class TictactoeController implements Initializable {
         ft.setCycleCount(10);
         ft.setAutoReverse(true);
         ft.play();
+    }
+    
+    @FXML
+    public void handleMenuAction(ActionEvent event){
+        MenuItem clickedMenu = (MenuItem) event.getTarget();
+        String menuLabel = clickedMenu.getText();
+        if("Play".equals(menuLabel)){
+            ObservableList<Node> buttons = gameBoard.getChildren();
+            buttons.forEach(btn -> {((Button) btn).setText("");
+            btn.getStyleClass().remove("winning-square");
+            });
+            isFirstPlayer = true;
+        }
+        else if("Quit".equals(menuLabel)){
+            System.exit(0);
+        }
+        else if("About".equals(menuLabel)){
+            System.out.println("Tic-Tac-Toe version 1");
+        }
+        else if("How to Play".equals(menuLabel)){
+            System.out.println("Clique sobre os quadrados");
+        }
     }
 
     @Override
