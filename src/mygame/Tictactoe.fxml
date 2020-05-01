@@ -26,7 +26,7 @@
         </MenuBar>
     </top>
     <center>
-        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER">
+        <GridPane fx:id = "gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
